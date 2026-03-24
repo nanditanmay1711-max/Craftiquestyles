@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Craftiquestyles - Handmade Custom Designs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background-color: #000; color: #fff; }
+        .gold { color: #D4AF37; }
+        .gold-bg { background-color: #D4AF37; }
+        .btn-gold { background-color: #D4AF37; transition: all 0.3s ease; }
+        .btn-gold:hover { background-color: #b8962e; transform: translateY(-2px); }
+        .btn-outline-gold { border: 2px solid #D4AF37; color: #D4AF37; transition: all 0.3s ease; }
+        .btn-outline-gold:hover { background-color: #D4AF37; color: #000; }
+        .logo-img { height: 60px; width: auto; }
+        @media (max-width: 768px) { .logo-img { height: 50px; } }
+        .fade-in { animation: fadeIn 1s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <!-- Admin Password Check -->
+    <div x-data="{ admin: false, pass: '', showLogin: false }" x-show="showLogin" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50" x-transition>
+        <div class="bg-gray-900 p-8 rounded-lg max-w-sm w-full mx-4">
+            <h2 class="text-2xl gold mb-4">Admin Panel</h2>
+            <input type="password" x-model="pass" placeholder="Enter Password" class="w-full p-3 bg-gray-800 border border-gold rounded mb-4 text-white">
+            <div class="flex gap-2">
+                <button @click="if(pass === 'craftiquestyles@1065') { admin = true; showLogin = false; } else { alert('Wrong Password'); pass = '' }" class="flex-1 btn-gold text-black font-bold py-2 rounded">Login</button>
+                <button @click="showLogin = false" class="flex-1 bg-gray-800 border border-gray-600 py-2 rounded">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-md z-40 border-b border-gold/20" x-data="{ open: false }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQIBAQEBAQIBAQECAgICAgICAgIDAwQDAwMDAwICAwQDAwQEBAQEA/8AACgAAAAAAAEBAAAAAEAEAAhEBAQEBAQEBAQEBAAAAAAAAAAEAAgMEBQYHCAkKCxEAAgECBAQFBgcICQoLJCUQDQRCgsCHNjQIAxQRFSgyFgLAAAgIA/8A" alt="Craftiquestyles Logo" class="logo-img fade-in">
+                    <span class="ml-2 text-xl gold font-bold">Craftiquestyles</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="hover:gold transition">Home</a>
+                    <div class="relative group">
+                        <button class="hover:gold transition">Shop</button>
+                        <div class="absolute hidden group-hover:block bg-black border border-gold/50 p-2 mt-2 rounded shadow-lg">
+                            <a href="#men" class="block p-2 hover:bg-gold/10 rounded">Men</a>
+                            <a href="#ladies" class="block p-2 hover:bg-gold/10 rounded">Ladies</a>
+                            <a href="#art" class="block p-2 hover:bg-gold/10 rounded">Art & Paintings</a>
+                            <a href="#crafts" class="block p-2 hover:bg-gold/10 rounded">Crafts</a>
+                        </div>
+                    </div>
+                    <button onclick="document.querySelector('[x-data]')._x_dataStack[0].showLogin = true" class="btn-gold px-4 py-2 text-black font-bold rounded text-sm">Admin</button>
+                </div>
+                <button class="md:hidden p-2" @click="open = !open">
+                    <i class="fas fa-bars text-2xl gold"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div x-show="open" class="md:hidden bg-black border-t border-gold/20" x-transition>
+            <a href="#home" class="block px-4 py-3 hover:gold">Home</a>
+            <a href="#men" class="block px-4 py-3 hover:gold">Men</a>
+            <a href="#ladies" class="block px-4 py-3 hover:gold">Ladies</a>
+            <a href="#art" class="block px-4 py-3 hover:gold">Art & Paintings</a>
+            <a href="#crafts" class="block px-4 py-3 hover:gold">Crafts</a>
+            <button onclick="document.querySelector('[x-data]')._x_dataStack[0].showLogin = true" class="block w-full text-left px-4 py-3 btn-gold text-black font-bold">Admin</button>
+        </div>
+    </nav>
+
+    <div x-data="app()" x-init="init()" id="app-container">
+
+        <!-- Hero Section -->
+        <section id="home" class="pt-20 pb-32 bg-gradient-to-b from-black to-gray-900 text-center">
+            <div class="max-w-4xl mx-auto px-4">
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQIBAQEBAQIBAQECAgICAgICAgIDAwQDAwMDAwICAwQDAwQEBAQEA/8AACgAAAAAAAEBAAAAAEAEAAhEBAQEBAQEBAQEBAAAAAAAAAAEAAgMEBQYHCAkKCxEAAgECBAQFBgcICQoLJCUQDQRCgsCHNjQIAxQRFSgyFgLAAAgIA/8A" alt="Logo" class="mx-auto logo-img mb-8 fade-in">
+                <h1 class="text-5xl md:text-7xl font-bold gold mb-8 fade-in">Don’t Buy Normal</h1>
+                <p class="text-2xl md:text-4xl font-light mb-12 fade-in">Design Your Own Style</p>
+                <a href="#men" class="btn-gold px-8 py-4 text-xl font-bold rounded-full text-black inline-block">Shop Now</a>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="py-20 bg-black">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-4xl font-bold gold text-center mb-16 fade-in">Our Collections</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <a href="#men" class="group">
+                        <div class="bg-gray-900 p-8 rounded-2xl text-center hover:scale-105 transition">
+                            <i class="fas fa-male text-6xl gold mb-4 group-hover:scale-110 transition"></i>
+                            <h3 class="text-2xl font-bold mb-2">Men</h3>
+                        </div>
+                    </a>
+                    <a href="#ladies" class="group">
+                        <div class="bg-gray-900 p-8 rounded-2xl text-center hover:scale-105 transition">
+                            <i class="fas fa-female text-6xl gold mb-4 group-hover:scale-110 transition"></i>
+                            <h3 class="text-2xl font-bold mb-2">Ladies</h3>
+                        </div>
+                    </a>
+                    <a href="#art" class="group">
+                        <div class="bg-gray-900 p-8 rounded-2xl text-center hover:scale-105 transition">
+                            <i class="fas fa-paint-brush text-6xl gold mb-4 group-hover:scale-110 transition"></i>
+                            <h3 class="text-2xl font-bold mb-2">Art & Paintings</h3>
+                        </div>
+                    </a>
+                    <a href="#crafts" class="group">
+                        <div class="bg
